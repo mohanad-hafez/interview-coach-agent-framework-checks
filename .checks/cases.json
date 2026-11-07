@@ -1,0 +1,601 @@
+{
+  "id": "3baded9d",
+  "task": "costTracker",
+  "cases": [
+    {
+      "id": "artifact-missing",
+      "partition": "development",
+      "input": {
+        "artifact_exists": false,
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 0,
+        "nanos": null
+      }
+    },
+    {
+      "id": "file-empty",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 0,
+        "nanos": null
+      }
+    },
+    {
+      "id": "sonnet-cache",
+      "partition": "development",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-sonnet-4-5",
+            "input_tokens": 1000,
+            "output_tokens": 500,
+            "cache_creation_input_tokens": 100,
+            "cache_read_input_tokens": 1000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "11175000",
+        "formatted": "$0.0112"
+      }
+    },
+    {
+      "id": "price-claude-opus-4-5",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-opus-4-5",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "110250000000"
+      }
+    },
+    {
+      "id": "price-claude-sonnet-4-5",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-sonnet-4-5",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "22050000000"
+      }
+    },
+    {
+      "id": "price-claude-haiku-4-5",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-haiku-4-5",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "5880000000"
+      }
+    },
+    {
+      "id": "price-claude-3-opus",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-3-opus",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "110250000000"
+      }
+    },
+    {
+      "id": "price-claude-3-5-sonnet",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-3-5-sonnet",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "22050000000"
+      }
+    },
+    {
+      "id": "price-claude-3-5-haiku",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "claude-3-5-haiku",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "5880000000"
+      }
+    },
+    {
+      "id": "price-gpt-4o",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4o",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "13750000000"
+      }
+    },
+    {
+      "id": "price-gpt-4o-mini",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4o-mini",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "825000000"
+      }
+    },
+    {
+      "id": "price-gpt-4.1",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4.1",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "10500000000"
+      }
+    },
+    {
+      "id": "price-o3",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "o3",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "52500000000"
+      }
+    },
+    {
+      "id": "price-o4-mini",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "o4-mini",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "5775000000"
+      }
+    },
+    {
+      "id": "price-gemini-1.5-pro",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gemini-1.5-pro",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "6250000000"
+      }
+    },
+    {
+      "id": "price-gemini-2.0-flash",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gemini-2.0-flash",
+            "input_tokens": 1000000,
+            "output_tokens": 1000000,
+            "cache_creation_input_tokens": 1000000,
+            "cache_read_input_tokens": 1000000
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "500000000"
+      }
+    },
+    {
+      "id": "unknown-model",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "unknown",
+            "input_tokens": 1000000,
+            "output_tokens": 2000000,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 2,
+        "nanos": "33000000000"
+      }
+    },
+    {
+      "id": "pr-routing",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4o-mini",
+            "input_tokens": 1000,
+            "output_tokens": 500,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": [
+            {
+              "number": 8
+            }
+          ]
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "450000",
+        "formatted": "$0.0005",
+        "first_kind": "add_comment",
+        "target_issue": 8
+      }
+    },
+    {
+      "id": "under-display-threshold",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4o-mini",
+            "input_tokens": 1,
+            "output_tokens": 1,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "750",
+        "formatted": "< $0.0001"
+      }
+    },
+    {
+      "id": "exact-alert-threshold",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4.1",
+            "input_tokens": 500000,
+            "output_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "1000000000"
+      }
+    },
+    {
+      "id": "zero-tokens",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4.1",
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "0",
+        "formatted": "< $0.0001"
+      }
+    },
+    {
+      "id": "aggregate-repeated-model",
+      "partition": "held_out",
+      "input": {
+        "artifact_exists": true,
+        "token_usage": [
+          {
+            "model": "gpt-4.1",
+            "input_tokens": 100,
+            "output_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          },
+          {
+            "model": "gpt-4.1",
+            "input_tokens": 100,
+            "output_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0
+          }
+        ],
+        "run": {
+          "number": "daily-repo-status",
+          "run_number": 27,
+          "conclusion": "success",
+          "html_url": "https://example.invalid/run/27",
+          "pull_requests": []
+        }
+      },
+      "expected": {
+        "action_count": 1,
+        "nanos": "400000",
+        "models": 1
+      }
+    }
+  ]
+}
